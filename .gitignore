@@ -36,3 +36,7 @@
 *.x86_64
 *.hex
 *.def
+
+# Temorary files
+*.tmp
+*.bak
