@@ -36,3 +36,11 @@
 *.x86_64
 *.hex
 *.def
+
+# Temporary files
+*.tmp
+*.bak
+
+# Other files
+*.json
+*.url
