@@ -3,6 +3,8 @@
 #endif
 
 #include "cpuid.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #ifndef _MSC_VER
@@ -234,16 +236,43 @@ uint32_t __cdecl cpu_signature() {
 }
 
 uint32_t __cdecl cpu_count() {
-    uint32_t count = 0;
-    cpu_set_t cs;
-    CPU_ZERO(&cs);
-    sched_getaffinity(0, sizeof(cs), &cs);
-    count = CPU_COUNT(&cs);
-    CPUID_01 regs;
-    cpuid(1, regs.Raw);
-    if (regs.EDX.HTT) count /= 2;
-    return count;
+	uint32_t count = 0;
+#ifdef _WIN32
+	SYSTEM_INFO systeminfo;
+	GetSystemInfo(&systeminfo);
+	count = systeminfo.dwNumberOfProcessors;
+	CPUID_01 regs;
+	cpuid(1, regs.Raw);
+	if (regs.EDX.HTT) count /= 2;
+#else
+	FILE *f;
+	char * mask = "/sys/devices/system/cpu/cpu%d/topology/physical_package_id";
+	char path[256];
+	char pkg[1];
+	memset(path, 256, 0);
+	int cpu_index = 0;
+	int last_package_id = 0;
+	while (1) {
+		sprintf(path, mask, cpu_index);
+		f = fopen(path, "r");
+		if (f) {
+			fread(pkg, 1, 1, f);
+			fclose(f);
+			pkg[1] = 0;
+			int pkg_id = atoi(pkg);
+			if (pkg_id > last_package_id) {
+				count++;
+				last_package_id = pkg_id;
+			}
+		} else break;
+		cpu_index++;
+	}
+	count++;
+#endif
+	return count;
 }
+
+
 
 
 // ----------------------

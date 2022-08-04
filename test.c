@@ -73,4 +73,3 @@ int main(int argc, char* argv[]) {
 	    printf("  Hyper Threading    : %s\n", info->features.Regs.EDX.HTT ? "enabled" : "disabled");
 	}
 }
-
