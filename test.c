@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 	for (; i <= info->max_values.extended; i++) {
 	    cpuid(i, r.Raw);
 	    if (r.EAX > 0 || r.EBX > 0 || r.ECX > 0 || r.EDX > 0)
-		printf("  Leaf=%x -->> [ EAX=%08x, EBX=%08x, ECX=%08x, EDX=%08x ]\n", i, r.EAX, r.EBX, r.ECX, r.EDX);
+		printf(PRINTF_MASK, i, r.EAX, r.EBX, r.ECX, r.EDX);
 	}
 
 	puts("\nHypervisor CPUID raw data:");
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	    for (; i <= hv; i++) {
 		cpuid(i, r.Raw);
 		if (r.EAX > 0 || r.EBX > 0 || r.ECX > 0 || r.EDX > 0)
-		    printf("  Leaf=%x -->> [ EAX=%08x, EBX=%08x, ECX=%08x, EDX=%08x ]\n", i, r.EAX, r.EBX, r.ECX, r.EDX);
+			printf(PRINTF_MASK, i, r.EAX, r.EBX, r.ECX, r.EDX);
 	    }
 	} else {
 	    printf("  -- Hypervisor is not present!\n");
