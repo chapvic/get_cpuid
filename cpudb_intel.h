@@ -41,6 +41,7 @@ static const char ARCH_Comet_Lake[] = "Comet Lake";
 static const char ARCH_Tiger_Lake[] = "Tiger Lake";
 static const char ARCH_Rocket_Lake[] = "Rocket Lake";
 static const char ARCH_Alder_Lake[] = "Alder Lake";
+static const char ARCH_Raptor_Lake[] = "Raptor Lake";
 static const char ARCH_Knights_Corner[] = "Knights Corner";
 static const char ARCH_Knights_Ferry[] = "Knights Ferry";
 static const char ARCH_Netburst[] = "Netburst";
@@ -161,7 +162,8 @@ static CPUDB _cpudb_intel[] = {
 	{ CPU_VEN_INTEL, 6, 0, 0x7, 0xA, ARCH_Rocket_Lake, "S", 14 },
 	{ CPU_VEN_INTEL, 6, 0, 0xA, 0x9, ARCH_Alder_Lake, "P", 10 },
 	{ CPU_VEN_INTEL, 6, 0, 0x7, 0x9, ARCH_Alder_Lake, "S", 10 },
-//	{ CPU_VEN_INTEL, 6, 0, 0, 0, "Raptor Lake", "", 10 },
+	{ CPU_VEN_INTEL, 6, 0, 0x7, 0xB, ARCH_Raptor_Lake, "S", 10 },
+	{ CPU_VEN_INTEL, 6, 0, 0xA, 0xB, ARCH_Raptor_Lake, "P", 10 },
 //	{ CPU_VEN_INTEL, 6, 0, 0, 0, "Meteor Lake", "", 7 },
 	//
 	// Family 11
